@@ -9,16 +9,17 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class Frame extends JFrame{
+public class Frame extends JFrame {
 
     private DefaultListModel<String> toDoListModel;
     private JList<String> toDoList;
     private JTextField taskInput;
-    private JButton addButton =new JButton("Add Task");
+    private JButton addButton = new JButton("Add Task");
 
-    
-    public Frame(){
+    public Frame() {
         setTitle("To-Do Tracker");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +28,7 @@ public class Frame extends JFrame{
         setUpContent();
     }
 
-    private void setUpLayout(){
+    private void setUpLayout() {
         setLayout(new BorderLayout());
         add(new JScrollPane(toDoList), BorderLayout.CENTER);
 
@@ -39,10 +40,19 @@ public class Frame extends JFrame{
         add(inputPanel, BorderLayout.SOUTH);
     }
 
-    private void setUpContent(){
+    private void setUpContent() {
         toDoListModel = new DefaultListModel<>();
         toDoList = new JList<>(toDoListModel);
         taskInput = new JTextField();
+
+        toDoList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    removeTask();
+                }
+            }
+        });
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -60,5 +70,11 @@ public class Frame extends JFrame{
             toDoListModel.addElement(task);
             taskInput.setText("");
         }
+    }
+
+    private void removeTask() {
+        int selectedIndex = toDoList.getSelectedIndex();
+        if (selectedIndex != -1)
+            toDoListModel.remove(selectedIndex);
     }
 }
