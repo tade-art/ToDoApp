@@ -7,10 +7,11 @@ Download this repository:
 https://github.com/tade-art/ToDoApp.git
 cd ToDo
 ```
-Then run the program using the following command:
+Then run the program in terminal using the following command:
 ```
 java ToDoListDriver
 ```
+You can run the program using the .exe file too, export it to desktop and run from there
 
 ## Controls
 To ***add*** a task:
