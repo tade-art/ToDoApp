@@ -5,6 +5,7 @@ A simple java program which can keep track of the user's to-do tasks. You can ad
 Download this repository:
 ```
 git clone https://github.com/tade-art/ToDoApp.git
+cd ToDoApp
 cd ToDo
 ```
 Then run the program in terminal using the following command:
